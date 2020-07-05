@@ -1,0 +1,12 @@
+{
+  "name": "message-board-app",
+  "displayName": "message-board-app",
+  "expo": {
+    "name": "message-board-app",
+    "slug": "message-board-app",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
