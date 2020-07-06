@@ -30,6 +30,33 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
+    firebase
+      .database()
+      .ref()
+      .child("messages")
+      .once("value", snapshot => {
+        const data = snapshot.val();
+        if (snapshot.val()) {
+          const initMessages = []
+          Object.keys(data).forEach(message => initMessages.push(data[message]));
+          this.setState({
+            messages: initMessages
+          })
+        }
+      });
+
+    firebase
+      .database()
+      .ref()
+      .child("messages")
+      .on("child_added", snapshot => {
+        const data = snapshot.val();
+        if (snapshot.val()) {
+          this.setState(prevState => ({
+            messages: [data, ...prevState.messages]
+          }))
+        }
+      });
 
   }
 
