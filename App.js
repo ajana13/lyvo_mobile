@@ -62,6 +62,13 @@ export default class App extends React.Component {
 
   addItem() {
     // firebase function here for sending data
+    if (!this.state.message) {
+      return;
+    }
+    const newMessage = firebase.database().ref()
+      .child("messages")
+      .push();
+    newMessage.set(this.state.message, () => this.setState({ message: '' }))
   }
 
   render() {
@@ -69,6 +76,7 @@ export default class App extends React.Component {
       <View style={styles.container} >
         <View style={styles.msgBox}>
           <TextInput placeholder='Enter your message'
+            value={this.state.message}
             onChangeText={(text) => this.setState({ message: text })}
             style={styles.txtInput} />
 
